@@ -61,14 +61,13 @@ module AdsCommon
 
     # Creates and sets up Savon client.
     def create_savon_client(endpoint, namespace)
-      Nori.advanced_typecasting = false
-      client = Savon::Client.new do |wsdl, httpi|
-        wsdl.endpoint = endpoint
-        wsdl.namespace = namespace
-        AdsCommon::Http.configure_httpi(@config, httpi)
-      end
-      client.config.raise_errors = false
-      client.config.logger.subject = get_logger()
+      #Nori.advanced_typecasting = false
+      client = Savon.client({endpoint: endpoint, namespace: namespace})# do |globals|
+      #  AdsCommon::Http.configure_httpi(@config, globals.http)
+      #end
+      
+      #client.config.raise_errors = false
+      #client.config.logger.subject = get_logger()
       return client
     end
 
